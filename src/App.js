@@ -3,6 +3,7 @@ import Footer from "./Components/Footer";
 import Form from "./Components/Form";
 import Landingpage from "./Components/Landingpage";
 import Temple from "./Components/Temple";
+import Socials from "./Components/Social";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Form/>
       <Temple/>
       <Footer/>
+      <Socials/>
     </>
   );
 }
