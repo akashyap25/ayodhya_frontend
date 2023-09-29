@@ -32,8 +32,8 @@ const PrasadForm = () => {
   const handleSubmit = async (values, { resetForm }) => {
     // Handle form submission here
      try {
-      const response = await axios.post('https://ayodhya-b.onrender.com/prasadForm', values);
-      // console.log(response.data);
+      const response = await axios.post('http://localhost:5000/prasadForm', values);
+      console.log(response.data);
       Swal.fire({
         icon: 'success',
         title: 'Form Submitted',
