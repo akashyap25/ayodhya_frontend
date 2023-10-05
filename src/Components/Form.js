@@ -13,6 +13,7 @@ const PrasadForm = () => {
     address: '',
     prasadQuantity: '',
     prasadAmount: '',
+    templeSelection: [],
   };
 
   const validationSchema = Yup.object().shape({
@@ -27,6 +28,7 @@ const PrasadForm = () => {
     address: Yup.string().required('Full address is required'),
     prasadQuantity: Yup.string().required('Prasad quantity is required'),
     prasadAmount: Yup.string().required('Prasad amount is required'),
+    templeSelection: Yup.array().min(1, 'Select at least one temple'),
   });
 
   const handleSubmit = async (values, { resetForm }) => {
@@ -52,12 +54,31 @@ const PrasadForm = () => {
     onSubmit: handleSubmit,
   });
 
+  const temples = [
+    { id: 'RamJanamBhumi', label: 'Ram JanamBhumi' },
+    { id: 'HanumanGadhi', label: 'Hanuman Gadhi' },
+    { id: 'KanakBhawan', label: 'Kanak Bhawan' },
+  ];
+
+   // Function to handle checkbox changes
+   const handleTempleChange = (event) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      formik.setFieldValue('templeSelection', [...formik.values.templeSelection, value]);
+    } else {
+      formik.setFieldValue(
+        'templeSelection',
+        formik.values.templeSelection.filter((temple) => temple !== value)
+      );
+    }
+  };
+
   return (
-    <div className=" max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg shadow-orange-500">
-      <h2 className="text-2xl font-semibold mb-4">Prasad Offering Form</h2>
+    <div className=" max-w-2xl mx-auto mt-20 lg:mg-28 p-6 bg-white rounded-lg shadow-lg shadow-orange-500">
+      <h2 className="text-2xl font-semibold mb-8 lg:mb-12 text-red-500">Prasad Offering Form (प्रसाद चढ़ाने के लिए फॉर्म)</h2>
       <form onSubmit={formik.handleSubmit}>
         <div className="mb-4">
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="name" className="block text-sm font-semibold text-slate-800">
             Name (नाम) *
           </label>
           <input
@@ -74,7 +95,7 @@ const PrasadForm = () => {
           )}
         </div>
         <div className="mb-4">
-          <label htmlFor="fatherName" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="fatherName" className="block text-sm font-semibold text-gray-800">
             Father's Name (पिता का नाम) *
           </label>
           <input
@@ -91,7 +112,7 @@ const PrasadForm = () => {
           )}
         </div>
         <div className="mb-4">
-          <label htmlFor="mobileNo" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="mobileNo" className="block text-sm font-semibold text-gray-800">
             Mobile No (फोन नंबर) *
           </label>
           <input
@@ -108,7 +129,7 @@ const PrasadForm = () => {
           )}
         </div>
         <div className="mb-4">
-          <label htmlFor="pinCode" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="pinCode" className="block text-sm font-semibold text-gray-800">
             Pin Code Number (पिन कोड नंबर) *
           </label>
           <input
@@ -125,7 +146,7 @@ const PrasadForm = () => {
           )}
         </div>
         <div className="mb-4">
-          <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="address" className="block text-sm font-semibold text-gray-800">
             Full Address (पूरा पता) *
           </label>
           <textarea
@@ -141,7 +162,7 @@ const PrasadForm = () => {
           )}
         </div>
         <div className="mb-4">
-          <label htmlFor="prasadQuantity" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="prasadQuantity" className="block text-sm font-semibold text-gray-800">
             How much Prasad should be offered? (प्रसाद कितनी मात्रा में चढ़ाना है ?) *
           </label>
           <select
@@ -163,7 +184,7 @@ const PrasadForm = () => {
           )}
         </div>
         <div className="mb-4">
-          <label htmlFor="prasadAmount" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="prasadAmount" className="block text-sm font-semibold text-gray-800">
             How much Prasad is to be offered? (कितने का प्रसाद चढ़ाना है ?) *
           </label>
           <select
@@ -182,6 +203,27 @@ const PrasadForm = () => {
           </select>
           {formik.touched.prasadAmount && formik.errors.prasadAmount && (
             <div className="text-orange-600 text-sm mt-1">{formik.errors.prasadAmount}</div>
+          )}
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-semibold text-gray-800 mb-2">Select Temples (मंदिर चुनें) *</label>
+          {temples.map((temple) => (
+            <div key={temple.id} className="flex items-center mb-2">
+              <input
+                type="checkbox"
+                id={temple.id}
+                name="templeSelection"
+                value={temple.id}
+                onChange={handleTempleChange}
+                checked={formik.values.templeSelection.includes(temple.id)}
+              />
+              <label htmlFor={temple.id} className="ml-2">
+                {temple.label}
+              </label>
+            </div>
+          ))}
+          {formik.touched.templeSelection && formik.errors.templeSelection && (
+            <div className="text-orange-600 text-sm mt-1">{formik.errors.templeSelection}</div>
           )}
         </div>
         <button

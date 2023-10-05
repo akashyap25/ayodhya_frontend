@@ -25,7 +25,7 @@ const Footer = () => {
   </div>
     <div className='p-2 text-right mr-4 pb-10'>
         <h2 className='font-semibold'>© Copyright Reserved 2023</h2>
-        <h2 className='font-medium ml-4'>Ajay Singh</h2>
+        <h2 className='font-medium ml-4'>Shiv Singh</h2>
         <h2 className='font-medium ml-4'>+919219408729</h2>
     </div>
 </section>
