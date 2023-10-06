@@ -95,21 +95,22 @@ function Carousel() {
             <h1 className='text-xl font-semibold text-orange-500'>Place of offering prasad (प्रसाद चढ़ाने का स्थान)</h1>
                 <ul className='mt-8 text-left ml-5 '>
                   <li>
-                    <p className='mt-2'>Ram Janmabhoomi Ayodhya ( राम जन्म भूमि अयोध्या )</p>
+                    <p className='mt-2 font-semibold'>Ram Janmabhoomi Ayodhya ( राम जन्म भूमि अयोध्या )</p>
                   </li>
                   <li>
-                   <p className='mt-2'>Hanumangarhi Ayodhya ( हनुमानगढ़ी अयोध्या )</p>
+                   <p className='mt-2 font-semibold'>Hanumangarhi Ayodhya ( हनुमानगढ़ी अयोध्या )</p>
                   </li>
                   <li>
-                    <p className='mt-2'>Kanak Bhawan Ayodhya ( कनक भवन अयोध्या )</p>
+                    <p className='mt-2 font-semibold'>Kanak Bhawan Ayodhya ( कनक भवन अयोध्या )</p>
                   </li>
                   <li>
-                    <p className='mt-2'>Shri Nageshwar Nath Mandir ( श्री नागेश्वर नाथ मंदिर )</p>
+                    <p className='mt-2 font-semibold'>Shri Nageshwar Nath Mandir ( श्री नागेश्वर नाथ मंदिर )</p>
                   </li>
                 </ul>
             </li>
-            <li className='mt-4 p-2 lg:p-4 shadow-md shadow-orange-500'>
-                <p className='mt-4'>While offering your Prasad in the temple, you will be shown through video call and then your Prasad will be deliveorange to your home.( मंदिर में प्रसाद चढ़ाते समय आपको वीडियो कॉल के जरिए दर्शन कराया जाएगा और फिर आपका प्रसाद आपके घर पहुंचा दिया जाएगा. )</p>
+            <li className='mt-4 p-2 lg:p-4 shadow-md shadow-orange-500 '>
+                <h1 className='font-bold text-black bg-red-500 p-2 w-24 mx-auto '>Note:</h1>
+                <p className='mt-4 font-semibold'>While offering your Prasad in the temple, you will be shown through video call and then your Prasad will be deliveorange to your home.( मंदिर में प्रसाद चढ़ाते समय आपको वीडियो कॉल के जरिए दर्शन कराया जाएगा और फिर आपका प्रसाद आपके घर पहुंचा दिया जाएगा. )</p>
             </li>
         </ol>
        
