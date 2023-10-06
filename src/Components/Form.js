@@ -58,6 +58,7 @@ const PrasadForm = () => {
     { id: 'RamJanamBhumi', label: 'Ram JanamBhumi' },
     { id: 'HanumanGadhi', label: 'Hanuman Gadhi' },
     { id: 'KanakBhawan', label: 'Kanak Bhawan' },
+    { id: 'ShriNageshwarNathMandir', label: 'Shri Nageshwar Nath Mandir' },
   ];
 
    // Function to handle checkbox changes

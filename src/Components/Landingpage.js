@@ -33,6 +33,7 @@ function Carousel() {
   };
 
   return (
+    <>
     <div className="relative w-full h-[calc(100vh-5rem)] overflow-hidden rounded-lg md:h-[calc(100vh-5rem)]">
       {desktopImages.map((desktopImage, index) => (
         <div
@@ -84,7 +85,39 @@ function Carousel() {
         </span>
       </button>
     </div>
+    <div className='p-12 text-center text-2xl lg:text-4xl'>
+        <h1 className=' font-semibold'>Prasad online in Ayodhya (अयोध्या में प्रसाद ऑनलाइन चढ़ाएं)  </h1>
+        <h1 className='text-orange-400 font-extrabold mt-4'>🚩जयश्री राम🚩</h1>
+    </div>
+    <div className='p-2 lg:p-8 text-center w-full md:w-1/2  mx-auto text-lg font-medium'>
+        <ol>
+            <li className='p-2 lg:p-4 shadow-md shadow-orange-500 mb-8'>
+            <h1 className='text-xl font-semibold text-orange-500'>Place of offering prasad (प्रसाद चढ़ाने का स्थान)</h1>
+                <ul className='mt-8 text-left ml-5 '>
+                  <li>
+                    <p className='mt-2'>Ram Janmabhoomi Ayodhya ( राम जन्म भूमि अयोध्या )</p>
+                  </li>
+                  <li>
+                   <p className='mt-2'>Hanumangarhi Ayodhya ( हनुमानगढ़ी अयोध्या )</p>
+                  </li>
+                  <li>
+                    <p className='mt-2'>Kanak Bhawan Ayodhya ( कनक भवन अयोध्या )</p>
+                  </li>
+                  <li>
+                    <p className='mt-2'>Shri Nageshwar Nath Mandir ( श्री नागेश्वर नाथ मंदिर )</p>
+                  </li>
+                </ul>
+            </li>
+            <li className='mt-4 p-2 lg:p-4 shadow-md shadow-orange-500'>
+                <p className='mt-4'>While offering your Prasad in the temple, you will be shown through video call and then your Prasad will be deliveorange to your home.( मंदिर में प्रसाद चढ़ाते समय आपको वीडियो कॉल के जरिए दर्शन कराया जाएगा और फिर आपका प्रसाद आपके घर पहुंचा दिया जाएगा. )</p>
+            </li>
+        </ol>
+       
+    </div>
+
+    </>
   );
 }
 
 export default Carousel;
+
