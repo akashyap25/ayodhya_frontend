@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const PrasadForm = () => {
+const PrasadForm = ({ selectedTemple }) => {
   const initialValues = {
     name: '',
     fatherName: '',
@@ -33,7 +33,7 @@ const PrasadForm = () => {
 
   const handleSubmit = async (values, { resetForm }) => {
     // Handle form submission here
-     try {
+    try {
       const response = await axios.post('https://ayodhya-b.onrender.com/prasadForm', values);
       console.log(response.data);
       Swal.fire({
@@ -42,10 +42,9 @@ const PrasadForm = () => {
         text: 'You have successfully submitted the form.',
       });
       resetForm();
-     } catch (error) {
+    } catch (error) {
       console.error(error);
-     }
-    // console.log(values);
+    }
   };
 
   const formik = useFormik({
@@ -54,15 +53,40 @@ const PrasadForm = () => {
     onSubmit: handleSubmit,
   });
 
-  const temples = [
-    { id: 'RamJanamBhumi', label: 'Ram JanamBhumi' },
-    { id: 'HanumanGadhi', label: 'Hanuman Gadhi' },
-    { id: 'KanakBhawan', label: 'Kanak Bhawan' },
-    { id: 'ShriNageshwarNathMandir', label: 'Shri Nageshwar Nath Mandir' },
+  const ayodhyaTemples = [
+    { id: 'RamJanamBhumi', label: 'Ram JanamBhumi (राम जन्मभूमि)' },
+    { id: 'HanumanGadhi', label: 'Hanuman Gadhi (हनुमान गढ़ी)' },
+    { id: 'KanakBhawan', label: 'Kanak Bhawan (कनक भवन)' },
+    { id: 'ShriNageshwarNathMandir', label: 'Shri Nageshwar Nath Mandir (श्री नागेश्वर नाथ मंदिर)' },
   ];
 
-   // Function to handle checkbox changes
-   const handleTempleChange = (event) => {
+  const mathuraTemples = [
+    { id: 'Banke Bihari Temple', label: 'Banke Bihari Temple ( बांके बिहारी मंदिर )' },
+    { id: 'Shri Radha Vallabh Temple', label: 'Shri Radha Vallabh Temple ( श्री राधा वल्लभ मंदिर )' },
+    { id: 'Radha Raman Temple ji', label: 'Radha Raman Temple ji ( राधा रमण मंदिर जी )' },
+    { id: 'Prem mandir', label: 'Prem mandir ( प्रेम मंदिर )' },
+  ];
+
+  const varanasiTemples = [
+    { id: 'KashiVishwanath', label: 'Kashi Vishwanath Temple ( काशी विश्वनाथ मन्दिर )' },
+    { id: 'SankatMochanHanuman', label: 'Sankat Mochan Hanuman Mandir ( संकट मोचन हनुमान मंदिर )' },
+    { id: 'Durga', label: 'Durga Temple ( दुर्गा मंदिर )' },
+  ];
+
+  const getTempleList = () => {
+    if (selectedTemple === 'Ayodhya') {
+      return ayodhyaTemples;
+    } else if (selectedTemple === 'Mathura') {
+      return mathuraTemples;
+    } else if (selectedTemple === 'Varanasi') {
+      return varanasiTemples;
+    }
+
+    return ayodhyaTemples;
+  };
+
+  // Function to handle checkbox changes
+  const handleTempleChange = (event) => {
     const { value, checked } = event.target;
     if (checked) {
       formik.setFieldValue('templeSelection', [...formik.values.templeSelection, value]);
@@ -75,7 +99,7 @@ const PrasadForm = () => {
   };
 
   return (
-    <div className=" max-w-2xl mx-auto mt-20 lg:mg-28 p-6 bg-white rounded-lg shadow-lg shadow-orange-500">
+    <div className="max-w-2xl mx-auto mt-20 lg:mt-28 p-6 bg-white rounded-lg shadow-lg shadow-orange-500">
       <h2 className="text-2xl font-semibold mb-8 lg:mb-12 text-red-500">Prasad Offering Form (प्रसाद चढ़ाने के लिए फॉर्म)</h2>
       <form onSubmit={formik.handleSubmit}>
         <div className="mb-4">
@@ -208,7 +232,7 @@ const PrasadForm = () => {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-semibold text-gray-800 mb-2">Select Temples (मंदिर चुनें) *</label>
-          {temples.map((temple) => (
+          {getTempleList().map((temple) => (
             <div key={temple.id} className="flex items-center mb-2">
               <input
                 type="checkbox"
@@ -218,7 +242,7 @@ const PrasadForm = () => {
                 onChange={handleTempleChange}
                 checked={formik.values.templeSelection.includes(temple.id)}
               />
-              <label htmlFor={temple.id} className="ml-2">
+              <label htmlFor={temple.id} className="ml-2 font-semibold">
                 {temple.label}
               </label>
             </div>
@@ -229,7 +253,7 @@ const PrasadForm = () => {
         </div>
         <button
           type="submit"
-          className="bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600 transition duration-200"
+          className="bg-orange-500 text-white font-semibold py-2 px-4 rounded-lg hover-bg-orange-600 transition duration-200"
         >
           Submit
         </button>

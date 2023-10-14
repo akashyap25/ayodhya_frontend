@@ -1,12 +1,56 @@
 import React, { useState, useEffect } from 'react';
 import left from '../Assets/icon-angle-left.svg';
 import right from '../Assets/icon-angle-right.svg';
-import { image1 as desktopImage1, image2 as desktopImage2, image3 as desktopImage3, image4 as desktopImage4, image5 as desktopImage5, image6 as desktopImage6, image7 as desktopImage7, image8 as desktopImage8, image9 as desktopImage9 } from '../Assets/desktopImages'; // Import desktop images
-import { image1 as mobileImage1, image2 as mobileImage2, image3 as mobileImage3, image4 as mobileImage4, image5 as mobileImage5, image6 as mobileImage6, image7 as mobileImage7, image8 as mobileImage8, image9 as mobileImage9 } from '../Assets/mobileImages'; // Import mobile images
+import { image1 as ayodhyadesktopImage1, image2 as ayodhyadesktopImage2, image3 as ayodhyadesktopImage3, image4 as ayodhyadesktopImage4 } from '../Assets/ayodhya/desktopImages'; 
+import { image1 as ayodhyamobileImage1, image2 as ayodhyamobileImage2, image3 as ayodhyamobileImage3, image4 as ayodhyamobileImage4 } from '../Assets/ayodhya/mobileImages'; 
+import { image1 as mathuradesktopImage1, image2 as mathuradesktopImage2, image3 as mathuradesktopImage3, image4 as mathuradesktopImage4 } from '../Assets/mathura/desktopImages'; 
+import { image1 as mathuramobileImage1, image2 as mathuramobileImage2, image3 as mathuramobileImage3, image4 as mathuramobileImage4 } from '../Assets/mathura/mobileImages'; 
+import { image1 as varanasidesktopImage1, image2 as varanasidesktopImage2, image3 as varanasidesktopImage3, image4 as varanasidesktopImage4 } from '../Assets/varanasi/desktopImages'; 
+import { image1 as varanasimobileImage1, image2 as varanasimobileImage2, image3 as varanasimobileImage3, image4 as varanasimobileImage4 } from '../Assets/varanasi/mobileImages';
 
-function Carousel() {
-  const desktopImages = [desktopImage1, desktopImage2, desktopImage3, desktopImage4, desktopImage5, desktopImage6, desktopImage7, desktopImage8, desktopImage9];
-  const mobileImages = [mobileImage1, mobileImage2, mobileImage3, mobileImage4, mobileImage5, mobileImage6, mobileImage7, mobileImage8, mobileImage9];
+//temples
+const ayodhyaTemples = [
+  { id: 'RamJanamBhumi', label: 'Ram JanamBhumi (राम जन्मभूमि)' },
+  { id: 'HanumanGadhi', label: 'Hanuman Gadhi (हनुमान गढ़ी)' },
+  { id: 'KanakBhawan', label: 'Kanak Bhawan (कनक भवन)' },
+  { id: 'ShriNageshwarNathMandir', label: 'Shri Nageshwar Nath Mandir (श्री नागेश्वर नाथ मंदिर)' },
+];
+
+const mathuraTemples = [
+  { id: 'BankeBihari', label: 'Banke Bihari Temple ( बांके बिहारी मंदिर )' },
+  { id: 'ShriRadhaVallabh', label: 'Shri Radha Vallabh Temple ( श्री राधा वल्लभ मंदिर )' },
+  { id: 'RadhaRaman', label: 'Radha Raman Temple ji ( राधा रमण मंदिर जी )' },
+  { id: 'Premmandir', label: 'Prem mandir ( प्रेम मंदिर )' },
+];
+
+const varanasiTemples = [
+  { id: 'KashiVishwanath', label: 'Kashi Vishwanath Temple ( काशी विश्वनाथ मन्दिर )' },
+  { id: 'SankatMochanHanuman', label: 'Sankat Mochan Hanuman Mandir ( संकट मोचन हनुमान मंदिर )' },
+  { id: 'Durga', label: 'Durga Temple ( दुर्गा मंदिर )' },
+];
+
+function Carousel({ selectedTemple }) {
+  // Create an object that maps temple names to their image arrays
+  const templeImages = {
+    Ayodhya: {
+      desktop: [ayodhyadesktopImage1, ayodhyadesktopImage2, ayodhyadesktopImage3, ayodhyadesktopImage4],
+      mobile: [ayodhyamobileImage1, ayodhyamobileImage2, ayodhyamobileImage3, ayodhyamobileImage4],
+    },
+    Mathura: {
+      desktop: [mathuradesktopImage1, mathuradesktopImage2, mathuradesktopImage3, mathuradesktopImage4],
+      mobile: [mathuramobileImage1, mathuramobileImage2, mathuramobileImage3, mathuramobileImage4],
+    },
+    Varanasi: {
+      desktop: [varanasidesktopImage1, varanasidesktopImage2, varanasidesktopImage3, varanasidesktopImage4],
+      mobile: [varanasimobileImage1, varanasimobileImage2, varanasimobileImage3, varanasimobileImage4],
+    },
+  };
+
+  // Get the images for the selected temple
+  const selectedImages = templeImages[selectedTemple];
+
+  const desktopImages = selectedImages.desktop;
+  const mobileImages = selectedImages.mobile;
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -32,93 +76,95 @@ function Carousel() {
     );
   };
 
+  const getTempleList = () => {
+    if (selectedTemple === 'Ayodhya') {
+      return ayodhyaTemples;
+    } else if (selectedTemple === 'Mathura') {
+      return mathuraTemples;
+    } else if (selectedTemple === 'Varanasi') {
+      return varanasiTemples;
+    }
+
+    return ayodhyaTemples;
+  };
+
   return (
     <>
-    <div className="relative w-full h-[calc(100vh-5rem)] overflow-hidden rounded-lg md:h-[calc(100vh-5rem)]">
-      {desktopImages.map((desktopImage, index) => (
-        <div
-          key={index}
-          className={`absolute w-full h-[calc(100vh-5rem)] ${
-            index === currentSlide ? 'opacity-100' : 'opacity-0'
-          } transition-opacity duration-700 ease-in-out`}
-        >
-          <img
-            src={window.innerWidth >= 768 ? desktopImage : mobileImages[index]}
-            alt={`Slide ${index + 1}`}
-            className="w-full h-full object-cover"
-          />
-        </div>
-      ))}
-       
-       {/* Slider indicators */}
-      <div className="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-        {desktopImages.map((_, index) => (
-          <button
+      <div className="relative w-full h-[calc(100vh-5rem)] overflow-hidden rounded-lg md:h-[calc(100vh-5rem)]">
+        {desktopImages.map((desktopImage, index) => (
+          <div
             key={index}
-            type="button"
-            className={`w-3 h-3 rounded-full ${
-              index === currentSlide ? 'bg-orange-400' : 'bg-gray-300'
-            }`}
-            aria-current={index === currentSlide ? 'true' : 'false'}
-            aria-label={`Slide ${index + 1}`}
-            data-carousel-slide-to={index}
-          ></button>
+            className={`absolute w-full h-[calc(100vh-5rem)] ${
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            } transition-opacity duration-700 ease-in-out`}
+          >
+            <img
+              src={window.innerWidth >= 768 ? desktopImage : mobileImages[index]}
+              alt={`Slide ${index + 1}`}
+              className="w-full h-full object-cover"
+            />
+          </div>
         ))}
+
+        {/* Slider indicators */}
+        <div className="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
+          {desktopImages.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              className={`w-3 h-3 rounded-full ${
+                index === currentSlide ? 'bg-orange-400' : 'bg-gray-300'
+              }`}
+              aria-current={index === currentSlide ? 'true' : 'false'}
+              aria-label={`Slide ${index + 1}`}
+              data-carousel-slide-to={index}
+            ></button>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          className="absolute top-1/2 left-0 z-30 flex items-center justify-center h-4 px-4 cursor-pointer group focus:outline-none"
+          onClick={goToPreviousSlide}
+        >
+          <span>
+            <img src={left} alt="previous" />
+          </span>
+        </button>
+        <button
+          type="button"
+          className="absolute top-1/2 right-0 z-30 flex items-center justify-center h-4 px-4 cursor-pointer group focus:outline-none"
+          onClick={goToNextSlide}
+        >
+          <span>
+            <img src={right} alt="next" />
+          </span>
+        </button>
       </div>
-
-      <button
-        type="button"
-        className="absolute top-1/2 left-0 z-30 flex items-center justify-center h-4 px-4 cursor-pointer group focus:outline-none"
-        onClick={goToPreviousSlide}
-      >
-        <span>
-          <img src={left} alt="previous" />
-        </span>
-      </button>
-      <button
-        type="button"
-        className="absolute top-1/2 right-0 z-30 flex items-center justify-center h-4 px-4 cursor-pointer group focus:outline-none"
-        onClick={goToNextSlide}
-      >
-        <span>
-          <img src={right} alt="next" />
-        </span>
-      </button>
-    </div>
-    <div className='p-12 text-center text-2xl lg:text-4xl'>
-        <h1 className=' font-semibold'>Prasad online in Ayodhya (अयोध्या में प्रसाद ऑनलाइन चढ़ाएं)  </h1>
-        <h1 className='text-orange-400 font-extrabold mt-4'>🚩जयश्री राम🚩</h1>
-    </div>
-    <div className='p-2 lg:p-8 text-center w-full md:w-1/2  mx-auto text-lg font-medium'>
-        <ol>
-            <li className='p-2 lg:p-4 shadow-md shadow-orange-500 mb-8'>
-            <h1 className='text-xl font-semibold text-orange-500'>Place of offering prasad (प्रसाद चढ़ाने का स्थान)</h1>
+      <div className='p-12 text-center text-2xl lg:text-4xl'>
+          <h1 className=' font-semibold'>Prasad online in {selectedTemple} (प्रसाद ऑनलाइन चढ़ाएं)  </h1>
+          <h1 className='text-orange-400 font-extrabold mt-4'>🚩जयश्री राम🚩</h1>
+      </div>
+      <div className='p-2 lg:p-8 text-center w-full md:w-1/2  mx-auto text-lg font-medium'>
+          <ol>
+              <li className='p-2 lg:p-4 shadow-md shadow-orange-500 mb-8'>
+                <h1 className='text-xl font-semibold text-orange-500'>Place of offering prasad (प्रसाद चढ़ाने का स्थान)</h1>
                 <ul className='mt-8 text-left ml-5 '>
-                  <li>
-                    <p className='mt-2 font-semibold'>Ram Janmabhoomi Ayodhya ( राम जन्म भूमि अयोध्या )</p>
-                  </li>
-                  <li>
-                   <p className='mt-2 font-semibold'>Hanumangarhi Ayodhya ( हनुमानगढ़ी अयोध्या )</p>
-                  </li>
-                  <li>
-                    <p className='mt-2 font-semibold'>Kanak Bhawan Ayodhya ( कनक भवन अयोध्या )</p>
-                  </li>
-                  <li>
-                    <p className='mt-2 font-semibold'>Shri Nageshwar Nath Mandir ( श्री नागेश्वर नाथ मंदिर )</p>
-                  </li>
+                  {getTempleList().map((temple, index) => (
+                    <li key={index}>
+                      <p className='mt-2 font-semibold'>{temple.label}</p>
+                    </li>
+                  ))}
                 </ul>
-            </li>
-            <li className='mt-4 p-2 lg:p-4 shadow-md shadow-orange-500 '>
-                <h1 className='font-bold text-black bg-red-500 p-2 w-24 mx-auto '>Note:</h1>
-                <p className='mt-4 font-semibold'>While offering your Prasad in the temple, you will be shown through video call and then your Prasad will be deliveorange to your home.( मंदिर में प्रसाद चढ़ाते समय आपको वीडियो कॉल के जरिए दर्शन कराया जाएगा और फिर आपका प्रसाद आपके घर पहुंचा दिया जाएगा. )</p>
-            </li>
-        </ol>
-       
-    </div>
-
+              </li>
+              <li className='mt-4 p-2 lg:p-4 shadow-md shadow-orange-500 '>
+                  <h1 className='font-bold text-black bg-red-500 p-2 w-24 mx-auto '>Note:</h1>
+                  <p className='mt-4 font-semibold'>While offering your Prasad in the temple, you will be shown through video call and then your Prasad will be delivered to your home. (मंदिर में प्रसाद चढ़ाते समय आपको वीडियो कॉल के जरिए दर्शन कराया जाएगा और फिर आपका प्रसाद आपके घर पहुंचा दिया जाएगा.)</p>
+              </li>
+          </ol>
+      </div>
     </>
   );
 }
 
 export default Carousel;
-
