@@ -34,7 +34,7 @@ const PrasadForm = ({ selectedTemple }) => {
   const handleSubmit = async (values, { resetForm }) => {
     // Handle form submission here
     try {
-      const response = await axios.post('https://ayodhya-b.onrender.com/prasadForm', values);
+      const response = await axios.post('https://ayodhya-402116.el.r.appspot.com/prasadForm', values);
       console.log(response.data);
       Swal.fire({
         icon: 'success',
