@@ -31,12 +31,12 @@ const ayodhyatempleData = [
   {
     title: 'Ram ki Paidi (राम की पैड़ी)',
     image: ramkipauri,
-    description: 'Ram ki Paidi comprises a series of ghats located on the bank of the river Sarayu and is widely used as a bathing ghat by the devotees of Lord Ram. This ghat was built in the year 1984 for the devotees of Lord Ram.',
+    description: 'Ram ki Paidi comprises a series of ghats located on the bank of the river Sarayu and is widely used as a bathing ghat by the devotees of Lord Ram.',
   },
   {
     title: 'Shri Nageshwar Nath Mandir (श्री नागेश्वर नाथ मंदिर)',
     image: nageshwarnath,
-    description: 'The temple of Nageshwarnath is said to have been established by Kush, the son of Rama. Legend is that Kush lost his armlet while bathing in the Saryu, which was picked up by a Nag-Kanya who fell in love more...',
+    description: 'The temple of Nageshwarnath is said to have been established by Kush, the son of Rama. Legend is that Kush lost his armlet while bathing in the Saryu more...',
   },
 ];
 
@@ -83,8 +83,9 @@ const varanasitempleData = [
 
 
 
-const Temple = ({selectedTemple}) => {
+// ... (previous code)
 
+const Temple = ({ selectedTemple }) => {
   const getTempleData = () => {
     if (selectedTemple === 'Ayodhya') {
       return ayodhyatempleData;
@@ -93,12 +94,12 @@ const Temple = ({selectedTemple}) => {
     } else if (selectedTemple === 'Varanasi') {
       return varanasitempleData;
     }
-  
+
     return ayodhyatempleData;
   };
 
   const cardStyle = {
-    height: '450px', // Fixed card height
+    height: '450px', // Fixed card height for desktop
   };
 
   const cardContainerStyle = {
@@ -106,17 +107,25 @@ const Temple = ({selectedTemple}) => {
     marginRight: '8px', // Margin between columns
   };
 
+  const isMobile = window.innerWidth < 640; // Adjust this breakpoint as needed
+
   return (
     <div className="flex flex-wrap justify-center items-center text-center mx-auto p-8 mt-24">
       {getTempleData().map((temple, index) => (
         <div
           key={index}
           className="w-full lg:w-1/3 bg-white rounded-lg shadow-lg shadow-orange-500 p-4 mb-4 lg:mb-0"
-          style={{ ...cardStyle, ...cardContainerStyle }}
+          style={{
+            ...cardContainerStyle,
+            height: isMobile ? 'auto' : cardStyle.height, // Set height to 'auto' for mobile
+          }}
         >
           <img src={temple.image} alt={temple.title} className="w-full h-auto" style={{ height: '50%' }} />
           <h2 className="text-xl font-semibold mt-2">{temple.title}</h2>
-          <p className="text-sm font-semibold my-8" style={{ height: '150px' }}>
+          <p
+            className="text-sm font-semibold my-8"
+            style={isMobile ? {} : { height: '150px', overflow: 'hidden' }} // Adjust styles for mobile
+          >
             {temple.description}
           </p>
         </div>
@@ -126,3 +135,4 @@ const Temple = ({selectedTemple}) => {
 };
 
 export default Temple;
+

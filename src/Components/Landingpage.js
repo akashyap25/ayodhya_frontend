@@ -29,6 +29,32 @@ const varanasiTemples = [
   { id: 'Durga', label: 'Durga Temple ( दुर्गा मंदिर )' },
 ];
 
+const ayodhyaPrasad = [
+  { id: 251, label: '250 ग्राम लड्डू , फूल की माला , हनुमान चालीसा की किताब', price: 251 },
+  { id: 551, label: '500 ग्राम लड्डू , फूल की माला , हनुमान चालीसा की किताब', price: 551 },
+  { id: 1051, label: '750 ग्राम लड्डू , फूल की माला , हनुमान चालीसा की किताब , वस्त्र', price: 1051 },
+  { id: 1111, label: '1 kg  लड्डू , फूल की माला , हनुमान चालीसा की किताब , वस्त्र', price: 1111 }
+];
+
+
+const mathuraPrasaad = [
+  { id: 351, label: '250 ग्राम पेड़ा , फूल की माला , राधा चालीसा की किताब', price: 351 },
+  { id: 551, label: '500 ग्राम पेड़ा , फूल की माला , राधा चालीसा की किताब', price: 551 },
+  { id: 1051, label: '750 ग्राम पेड़ा , फूल की माला , राधा चालीसा की किताब , वस्त्र', price: 1051 },
+  { id: 1111, label: '1 kg पेड़ा , फूल की माला , राधा चालीसा की किताब , वस्त्र', price: 1111 }
+];
+
+const varanasiPrasad = [
+  { id: 351, label: '250 ग्राम लड्डू , फूल की माला', price: 351 },
+  { id: 551, label: '500 ग्राम लड्डू , फूल की माला', price: 551 },
+  { id: 1051, label: '750 ग्राम लड्डू , फूल की माला , वस्त्र', price: 1051 },
+  { id: 1111, label: '1 kg लड्डू , फूल की माला , वस्त्र', price: 1111 },
+];
+
+
+
+
+
 function Carousel({ selectedTemple }) {
   // Create an object that maps temple names to their image arrays
   const templeImages = {
@@ -86,6 +112,18 @@ function Carousel({ selectedTemple }) {
     }
 
     return ayodhyaTemples;
+  };
+
+  const getPrasad = () => {
+    if (selectedTemple === 'Ayodhya') {
+      return ayodhyaPrasad;
+    } else if (selectedTemple === 'Mathura') {
+      return mathuraPrasaad;
+    } else if (selectedTemple === 'Varanasi') {
+      return varanasiPrasad;
+    }
+
+    return ayodhyaPrasad;
   };
 
   return (
@@ -161,6 +199,22 @@ function Carousel({ selectedTemple }) {
                   <h1 className='font-bold text-black bg-red-500 p-2 w-24 mx-auto '>Note:</h1>
                   <p className='mt-4 font-semibold'>While offering your Prasad in the temple, you will be shown through video call and then your Prasad will be delivered to your home. (मंदिर में प्रसाद चढ़ाते समय आपको वीडियो कॉल के जरिए दर्शन कराया जाएगा और फिर आपका प्रसाद आपके घर पहुंचा दिया जाएगा.)</p>
               </li>
+              <li className='mt-4 p-2 lg:p-4 shadow-md shadow-orange-500 '>
+  <ul>
+    <h1 className='font-bold text-black p-2 w-24 mx-auto '>Note:</h1>
+    {getPrasad().map((item) => (
+      <>
+      
+      <li className='flex gap-2 mb-4 lg:ml-4' key={item.id}>
+        <h1 className=' font-semibold text-red-500'>₹{item.price}:</h1>
+        <p className='text-xl font-semibold '>{item.label}</p>
+        
+      </li>
+      </>
+    ))}
+  </ul>
+</li>
+
           </ol>
       </div>
     </>

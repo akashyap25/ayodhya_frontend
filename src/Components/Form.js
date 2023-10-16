@@ -73,6 +73,28 @@ const PrasadForm = ({ selectedTemple }) => {
     { id: 'Durga', label: 'Durga Temple ( दुर्गा मंदिर )' },
   ];
 
+  const ayodhyaPrasad = [
+    { id: 251, label: '250 ग्राम लड्डू , फूल की माला , हनुमान चालीसा की किताब', price: 251 },
+    { id: 551, label: '500 ग्राम लड्डू , फूल की माला , हनुमान चालीसा की किताब', price: 551 },
+    { id: 1051, label: '750 ग्राम लड्डू , फूल की माला , हनुमान चालीसा की किताब , वस्त्र', price: 1051 },
+    { id: 1111, label: '1 kg  लड्डू , फूल की माला , हनुमान चालीसा की किताब , वस्त्र', price: 1111 }
+  ];
+  
+  
+  const mathuraPrasaad = [
+    { id: 351, label: '250 ग्राम पेड़ा , फूल की माला , राधा चालीसा की किताब', price: 351 },
+    { id: 551, label: '500 ग्राम पेड़ा , फूल की माला , राधा चालीसा की किताब', price: 551 },
+    { id: 1051, label: '750 ग्राम पेड़ा , फूल की माला , राधा चालीसा की किताब , वस्त्र', price: 1051 },
+    { id: 1111, label: '1 kg पेड़ा , फूल की माला , राधा चालीसा की किताब , वस्त्र', price: 1111 }
+  ];
+  
+  const varanasiPrasad = [
+    { id: 351, label: '250 ग्राम लड्डू , फूल की माला', price: 351 },
+    { id: 551, label: '500 ग्राम लड्डू , फूल की माला', price: 551 },
+    { id: 1051, label: '750 ग्राम लड्डू , फूल की माला , वस्त्र', price: 1051 },
+    { id: 1111, label: '1 kg लड्डू , फूल की माला , वस्त्र', price: 1111 },
+  ];
+
   const getTempleList = () => {
     if (selectedTemple === 'Ayodhya') {
       return ayodhyaTemples;
@@ -83,6 +105,18 @@ const PrasadForm = ({ selectedTemple }) => {
     }
 
     return ayodhyaTemples;
+  };
+
+  const getPrasad = () => {
+    if (selectedTemple === 'Ayodhya') {
+      return ayodhyaPrasad;
+    } else if (selectedTemple === 'Mathura') {
+      return mathuraPrasaad;
+    } else if (selectedTemple === 'Varanasi') {
+      return varanasiPrasad;
+    }
+
+    return ayodhyaPrasad;
   };
 
   // Function to handle checkbox changes
@@ -209,27 +243,28 @@ const PrasadForm = ({ selectedTemple }) => {
           )}
         </div>
         <div className="mb-4">
-          <label htmlFor="prasadAmount" className="block text-sm font-semibold text-gray-800">
-            How much Prasad is to be offered? (कितने का प्रसाद चढ़ाना है ?) *
-          </label>
-          <select
-            id="prasadAmount"
-            name="prasadAmount"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.prasadAmount}
-            className="mt-1 p-2 w-full border rounded-lg"
-          >
-            <option value="">Select</option>
-            <option value="251 Rs">251 Rs</option>
-            <option value="551 Rs">551 Rs</option>
-            <option value="1051 Rs">1051 Rs</option>
-            <option value="1111 Rs">1111 Rs</option>
-          </select>
-          {formik.touched.prasadAmount && formik.errors.prasadAmount && (
-            <div className="text-orange-600 text-sm mt-1">{formik.errors.prasadAmount}</div>
-          )}
-        </div>
+  <label htmlFor="prasadAmount" className="block text-sm font-semibold text-gray-800">
+    How much Prasad is to be offered? (कितने का प्रसाद चढ़ाना है ?) *
+  </label>
+  <select
+    id="prasadAmount"
+    name="prasadAmount"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.prasadAmount}
+    className="mt-1 p-2 w-full border rounded-lg"
+  >
+    <option value="">Select</option>
+    {getPrasad().map((prasadItem) => (
+      <option className='font-semibold text-base' key={prasadItem.id} value={prasadItem.price}>
+      ₹{prasadItem.price}
+      </option>
+    ))}
+  </select>
+  {formik.touched.prasadAmount && formik.errors.prasadAmount && (
+    <div className="text-orange-600 text-sm mt-1">{formik.errors.prasadAmount}</div>
+  )}
+</div>
         <div className="mb-4">
           <label className="block text-sm font-semibold text-gray-800 mb-2">Select Temples (मंदिर चुनें) *</label>
           {getTempleList().map((temple) => (

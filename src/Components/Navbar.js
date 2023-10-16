@@ -86,11 +86,6 @@ export default function Navbar() {
                 Contact
               </a>
             </li>
-            <li className="border-t border-slate-400 py-4 lg:border-transparent lg:py-0">
-              <a href="#login" className="bg-orange-400 lg:bg-orange-400 font-semibold text-white py-2 px-4 rounded shadow-lg hover:opacity-75 lg:text-lg uppercase tracking-widest border-2 lg:border-orange-400 lg:hover-bg-transparent lg:hover-text-slate-800 transition-all duration-200 w-full">
-                Login
-              </a>
-            </li>
           </ul>
         </nav>
       </header>
